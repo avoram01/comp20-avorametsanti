@@ -1,0 +1,74 @@
+.garfield {
+    background:url(garfield.gif);
+}
+
+@media screen and (min-width: 1200px) {
+    .garfield{
+        width:400px; 
+        height:132.67px; 
+        background-position: 0px 0px;
+    }
+}
+
+@media screen and (min-width: 1100px) 
+              and (max-width: 1200px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: -400px 0px;
+    }
+}
+
+@media screen and (min-width: 1000px) 
+              and (max-width: 1100px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: 0px -132.67px;
+    }
+}
+
+
+@media screen and (min-width: 900px) 
+              and (max-width: 1000px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: -200px -132.67px;
+    }
+}
+
+@media screen and (min-width: 800px) 
+              and (max-width: 900px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: -400px -132.67px;
+    }
+}
+
+@media screen and (min-width: 700px) 
+              and (max-width: 800px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: 0px -265.34px;
+    }
+}
+
+@media screen and (min-width: 600px) 
+              and (max-width: 700px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: -200px -265.34px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .garfield{
+        width:200px; 
+        height:132.67px; 
+        background-position: -400px -265.34px;
+    }
+}
