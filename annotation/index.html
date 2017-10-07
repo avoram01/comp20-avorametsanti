@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>A Classic</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">A Classic</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/classic.mp4" id="a_classic" controls></video>
+<div id="lyrics"></div>
+
+<video controls>
+    <track kind="subtitles" src="lyrics.vtt" srclang="en">
+</video>
+
+<script>
+    var video = document.getElementById("a_classic");
+    var captions = document.getElementById("lyrics");
+
+    document.addEventListener("timeupdate", function(ID) {
+        if ((video.currentTime > 10) && (video.currentTime < 13)) {
+            document.getElementById("lyrics").innerHTML = 
+            "Children have You ever met the Bogeyman before";
+        } else if ((video.currentTime > 13) && (video.currentTime < 18)) {
+            document.getElementById("lyrics").innerHTML = "No, of course You haven't for You're much too good, I'm sure";
+        } else if ((video.currentTime > 18) && (video.currentTime < 22)) {
+            document.getElementById("lyrics").innerHTML = "Don't You be afraid of him if he should visit You,";
+        } else if((video.currentTime > 22) && (video.currentTime < 25)) {
+            document.getElementById("lyrics").innerHTML = "He's a great big coward, so I'll tell You what to do";
+        } else if ((video.currentTime > 25) && (video.currentTime < 29)) {
+            document.getElementById("lyrics").innerHTML = "Hush, hush, hush, here comes the Bogeyman,";
+        } else if ((video.currentTime > 29) && (video.currentTime < 33)) {
+            document.getElementById("lyrics").innerHTML = "Don't let him come too close to You, he'll catch you if he can.";
+        } else if ((video.currentTime > 33) && (video.currentTime < 37)) {
+            document.getElementById("lyrics").innerHTML = "Just pretend that you're a crocodile";
+        } else if ((video.currentTime > 37) && (video.currentTime < 41)) {
+            document.getElementById("lyrics").innerHTML = "And you will find that Bogeyman will run away a mile.";
+        } else if ((video.currentTime > 41) && (video.currentTime < 45)) {
+            document.getElementById("lyrics").innerHTML = "Say Shoo shoo and stick him with a pin";
+        } else if ((video.currentTime > 45) && (video.currentTime < 49)) {
+            document.getElementById("lyrics").innerHTML = "Bogeyman will very nearly jump out of his skin";
+        } else if ((video.currentTime > 49) && (video.currentTime < 53)) {
+            document.getElementById("lyrics").innerHTML = "Say buzz buzz just like the wasps that sting";
+        } else if ((video.currentTime > 50) && (video.currentTime < 57)) {
+            document.getElementById("lyrics").innerHTML = "Bogeyman will think you are an elephant with wings";
+        } else if ((video.currentTime > 57) && (video.currentTime < 60)) {
+            document.getElementById("lyrics").innerHTML = "Hush, hush, hush, here comes the Bogeyman";
+        } else if ((video.currentTime > 60) && (video.currentTime < 65)) {
+            document.getElementById("lyrics").innerHTML = " ";
+        } else if ((video.currentTime > 65) && (video.currentTime < 68)) {
+            document.getElementById("lyrics").innerHTML = "Tell him you've got soldiers in your bed";
+        } else if ((video.currentTime > 68) && (video.currentTime < 73)) {
+            document.getElementById("lyrics").innerHTML = "For he will never guess that they are only made of lead";
+        }  else if ((video.currentTime > 72) && (video.currentTime < 80)) {
+            document.getElementById("lyrics").innerHTML = " ";
+        } else if ((video.currentTime > 80) && (video.currentTime < 84)) {
+            document.getElementById("lyrics").innerHTML = "Say Hush hush, he'll think that you're asleep";
+        } else if ((video.currentTime > 84) && (video.currentTime < 88)) {
+            document.getElementById("lyrics").innerHTML = "If you make a lovely snore away he'll softly creep";
+        } else if ((video.currentTime > 88) && (video.currentTime < 92)) {
+            document.getElementById("lyrics").innerHTML = "Sing this tune you children one and all";
+        } else if ((video.currentTime > 92) && (video.currentTime < 96)) {
+            document.getElementById("lyrics").innerHTML = "Bogeyman will run away, he'll think it's Henry Hall!";
+        } else if ((video.currentTime > 96) && (video.currentTime < 100)) {
+            document.getElementById("lyrics").innerHTML = "When the shadows of the evening creep across the sky";
+        } else if ((video.currentTime > 100) && (video.currentTime < 104)) {
+            document.getElementById("lyrics").innerHTML = "And your Mummy comes upstairs to sing a lullaby";
+        } else if ((video.currentTime > 104) && (video.currentTime < 107)) {
+            document.getElementById("lyrics").innerHTML = "Tell her that the bogeyman no longer frightens you";
+        } else if ((video.currentTime > 107) && (video.currentTime < 111)) {
+            document.getElementById("lyrics").innerHTML = "Uncle Henry's very kindly told you what to do";
+        } else if ((video.currentTime > 111) && (video.currentTime < 115)) {
+            document.getElementById("lyrics").innerHTML = "Hush, hush, hush, here comes the Bogeyman";
+        } else if ((video.currentTime > 115) && (video.currentTime < 119)) {
+            document.getElementById("lyrics").innerHTML = "Don't let him come too close to you, He'll catch you if he can.";
+        } else if ((video.currentTime > 119) && (video.currentTime < 123)) {
+            document.getElementById("lyrics").innerHTML = "Just pretend your teddy bear's a dog";
+        } else if ((video.currentTime > 123) && (video.currentTime < 127)) {
+            document.getElementById("lyrics").innerHTML = "Then shout out, 'Fetch him, Teddy!' and he'll hop off like a frog.";
+        } else if ((video.currentTime > 127) && (video.currentTime < 135)) {
+            document.getElementById("lyrics").innerHTML = " ";
+        } else if ((video.currentTime > 135) && (video.currentTime < 139)) {
+            document.getElementById("lyrics").innerHTML = "Say Meoow, pretend that you're a cat";
+        } else if ((video.currentTime > 139) && (video.currentTime < 143)) {
+            document.getElementById("lyrics").innerHTML = "He'll think you may scratch him that make him fall down flat";
+        } else if ((video.currentTime > 143) && (video.currentTime < 147)) {
+            document.getElementById("lyrics").innerHTML = "Just pretend he isn't really there";
+        } else if ((video.currentTime > 147) && (video.currentTime < 150)) {
+            document.getElementById("lyrics").innerHTML = "You will find that Bogey man will vanish in thin air";
+        } else if ((video.currentTime > 150) && (video.currentTime < 159)) {
+            document.getElementById("lyrics").innerHTML = " ";
+        } else if ((video.currentTime > 159) && (video.currentTime < 162)) {
+            document.getElementById("lyrics").innerHTML = "Here's one way to catch him without fail";
+        } else if ((video.currentTime > 162) && (video.currentTime < 164)) {
+            document.getElementById("lyrics").innerHTML = "Just keep a little salt with you";
+        } else if ((video.currentTime > 164) && (video.currentTime < 166)) {
+            document.getElementById("lyrics").innerHTML = "and put it on his tail";
+        }
+    }, true);
+
+</script>
+</body>
+</html> 
