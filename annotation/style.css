@@ -1,0 +1,22 @@
+#title {
+    font-family: 'Rye', cursive;
+    font-size: 40px;
+    text-align: center;
+    background-color: #800000;
+
+}
+
+#a_classic {
+    display: block;
+    margin: 0 auto;
+}
+
+#lyrics {
+    font-family: 'Nosifer', cursive;
+    text-align: center;
+    background-color: #D3D3D3
+}
+
+body {
+    background-image: url('https://media.giphy.com/media/vl8ncD72EnhoA/giphy.gif')
+}
