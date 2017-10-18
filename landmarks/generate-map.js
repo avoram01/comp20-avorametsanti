@@ -9,7 +9,17 @@ var myOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 var request = new XMLHttpRequest();
-var markers = Array();
+var peopleMarkers = Array();
+var landmarkMarkers = Array();
+var infowindow = new google.maps.InfoWindow();
+var icons = {
+          person: {
+            icon: 'stickman.png'
+          },
+          landmark: {
+            icon: 'statueofliberty.jpg'
+          },
+}
 
 //sending my location and receiving other locations from server
 function init() {
@@ -27,18 +37,28 @@ function getLocations(){
             var rawData = request.responseText;
             locations = JSON.parse(rawData);
             console.log(locations);
+
+            //creating marker for each person and landmark
             for (i = 0; i < locations.people.length; i++) {
-                var currLocation = {lat: locations.people[i].lat, lng: locations.people[i].lng};
-                markers[i] = new google.maps.Marker({
-                    position: currLocation,
+                var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
+                peopleMarkers[i] = new google.maps.Marker({
+                    position: currPerson,
                     title: locations.people[i]._id + "'s' Location"
                 });
-                markers[i].setMap(map);
+
+                if (i < locations.landmarks.length) {
+                    var currLandmark = {lat: locations.landmarks[i].geometry.coordinates[0],
+                                    lng: locations.landmarks[i].geometry.coordinates[1]};
+                    landmarkMarkers[i] = new google.maps.Marker({
+                        position: currLandmark,
+                        title:locations.landmarks[i].properties.Location_Name
+                    });
+                    landmarkMarkers[i].setMap(map);
+                }
+                peopleMarkers[i].setMap(map);
+                onClick(peopleMarkers[i], locations.people[i]._id);
+                //onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name);
             }
-            console.log(markers);
-            
-            var parameters = "login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng;
-            //console.log( "parameters: " + parameters);
         }   
     }
     request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
@@ -67,4 +87,12 @@ function createMap() {
         title: "Here I Am!"
     });
     marker.setMap(map);
+}
+
+//when marker is clicked
+function onClick(marker, title) {
+    google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(title + ", " + " miles away");
+                    infowindow.open(map, marker);
+    });
 }
