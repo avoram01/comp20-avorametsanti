@@ -12,14 +12,6 @@ var request = new XMLHttpRequest();
 var peopleMarkers = Array();
 var landmarkMarkers = Array();
 var infowindow = new google.maps.InfoWindow();
-var icons = {
-          person: {
-            icon: 'stickman.png'
-          },
-          landmark: {
-            icon: 'statueofliberty.jpg'
-          },
-}
 
 //sending my location and receiving other locations from server
 function init() {
@@ -44,20 +36,24 @@ function getLocations(){
                 peopleMarkers[i] = new google.maps.Marker({
                     position: currPerson,
                     title: locations.people[i]._id + "'s' Location"
+                    //icon: 'stickman.png'
                 });
 
                 if (i < locations.landmarks.length) {
                     var currLandmark = {lat: locations.landmarks[i].geometry.coordinates[0],
-                                    lng: locations.landmarks[i].geometry.coordinates[1]};
-                    landmarkMarkers[i] = new google.maps.Marker({
-                        position: currLandmark,
-                        title:locations.landmarks[i].properties.Location_Name
+                        lng: locations.landmarks[i].geometry.coordinates[1]};
+                        landmarkMarkers[i] = new google.maps.Marker({
+                            position: currLandmark,
+                            title:locations.landmarks[i].properties.Location_Name
+                        //icon: 'statueofliberty.jpg'
                     });
-                    landmarkMarkers[i].setMap(map);
+                    //if landmark is less than 1 mile away {
+                        landmarkMarkers[i].setMap(map);
+                    //}
                 }
                 peopleMarkers[i].setMap(map);
-                onClick(peopleMarkers[i], locations.people[i]._id);
-                //onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name);
+                onClick(peopleMarkers[i], locations.people[i]._id, locations.people[i].lat, locations.people[i].lng);
+                //onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, );
             }
         }   
     }
@@ -84,15 +80,27 @@ function createMap() {
     map.panTo(myLocation);
     marker = new google.maps.Marker({
         position: myLocation,
-        title: "Here I Am!"
+        title: "My Location"
+        //icon: me.jpeg
     });
     marker.setMap(map);
+    onClick(marker, "JxwgTxWT");
+    //FUNCTION TO CALC + DISPLAY NEAREST LANDMARK
 }
 
 //when marker is clicked
-function onClick(marker, title) {
+function onClick(marker, title, lat, lng) {
+    var distanceAway = distanceBetween(lat, lng);
     google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.setContent(title + ", " + " miles away");
-                    infowindow.open(map, marker);
+        infowindow.setContent(title + ", " + " miles away");
+        infowindow.open(map, marker);
+        //infowindow.setContent(this.content + title + ", " + " miles away");
+        //infowindow.open(map, this);
     });
+}
+
+//calculates distance between my location and another
+function distanceBetween(lat, lng) {
+    //var tohere = new google.maps.LatLng(lat, lng);
+    //google.maps.geometry.spherical.computeDistanceBetween(myLocation, tohere);
 }
