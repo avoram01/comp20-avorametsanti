@@ -28,36 +28,37 @@ function getLocations(){
         if (request.readyState == 4 && request.status == 200) {
             var rawData = request.responseText;
             locations = JSON.parse(rawData);
-            console.log(locations);
+            //console.log(locations);
 
-            //creating marker for each person and landmark
-            for (i = 0; i < locations.people.length; i++) {
-                var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
-                peopleMarkers[i] = new google.maps.Marker({
-                    position: currPerson,
-                    title: locations.people[i]._id + "'s' Location"
-                    //icon: 'stickman.png'
-                });
-
-                if (i < locations.landmarks.length) {
-                    var currLandmark = {lat: locations.landmarks[i].geometry.coordinates[0],
-                        lng: locations.landmarks[i].geometry.coordinates[1]};
-                        landmarkMarkers[i] = new google.maps.Marker({
-                            position: currLandmark,
-                            title:locations.landmarks[i].properties.Location_Name
+            //creating markers for landmarks
+            for (var i = 0; i < locations.landmarks.length; i++) {
+                var currentLandmark = {lat: locations.landmarks[i].geometry.coordinates[1],
+                    lng: locations.landmarks[i].geometry.coordinates[0]};
+                    console.log(locations.landmarks[i].geometry.coordinates); 
+                    landmarkMarkers[i] = new google.maps.Marker({
+                        position: currentLandmark,
+                        title: "'s' Location",
                         //icon: 'statueofliberty.jpg'
                     });
-                    //if landmark is less than 1 mile away {
-                        landmarkMarkers[i].setMap(map);
-                    //}
+                    landmarkMarkers[i].setMap(map);
+                    onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, currentLandmark.lat, currentLandmark.lng);       
                 }
-                peopleMarkers[i].setMap(map);
-                onClick(peopleMarkers[i], locations.people[i]._id, locations.people[i].lat, locations.people[i].lng);
-                //onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, );
-            }
-        }   
-    }
-    request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
+            //creating marker for each person
+            for (var i = 0; i < locations.people.length; i++) {
+               var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
+               peopleMarkers[i] = new google.maps.Marker({
+                   position: currPerson,
+                   title: locations.people[i]._id + "'s' Location"
+                   //icon: 'statueofliberty.jpg'
+               });
+
+               console.log(locations);
+               peopleMarkers[i].setMap(map);
+               onClick(peopleMarkers[i], locations.people[i]._id, locations.people[i].lat, locations.people[i].lng);
+           }
+       }   
+   }
+   request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
 }
 
 //gets my location
@@ -92,7 +93,7 @@ function createMap() {
 function onClick(marker, title, lat, lng) {
     var distanceAway = distanceBetween(lat, lng);
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(title + ", " + " miles away");
+        infowindow.setContent(title + ", " + distanceAway + " miles away");
         infowindow.open(map, marker);
         //infowindow.setContent(this.content + title + ", " + " miles away");
         //infowindow.open(map, this);
@@ -101,6 +102,8 @@ function onClick(marker, title, lat, lng) {
 
 //calculates distance between my location and another
 function distanceBetween(lat, lng) {
-    //var tohere = new google.maps.LatLng(lat, lng);
-    //google.maps.geometry.spherical.computeDistanceBetween(myLocation, tohere);
+    var tohere = new google.maps.LatLng(lat, lng);
+    var meters = google.maps.geometry.spherical.computeDistanceBetween(myLocation, tohere);
+    console.log(meters);
+    return meters/1,609.344;
 }
