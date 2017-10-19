@@ -11,7 +11,10 @@ var myOptions = {
 var request = new XMLHttpRequest();
 var peopleMarkers = Array();
 var landmarkMarkers = Array();
+var landmarkDistances = Array();
 var infowindow = new google.maps.InfoWindow();
+var closest = 9999;
+var landmark;
 
 //sending my location and receiving other locations from server
 function init() {
@@ -21,6 +24,7 @@ function init() {
     } 
 }
 
+//getting locations from servers
 function getLocations(){
     request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -35,12 +39,20 @@ function getLocations(){
                     lng: locations.landmarks[i].geometry.coordinates[0]};
                     landmarkMarkers[i] = new google.maps.Marker({
                         position: currentLandmark,
-                        title: "'s' Location",
+                        title: locations.landmarks[i].properties.Location_Name,
                         icon: 'liberty.png'
                     });
                     landmarkMarkers[i].setMap(map);
+                    landmarkDistances[i] = distanceBetween(currentLandmark.lat, currentLandmark.lng);
                     onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, currentLandmark.lat, currentLandmark.lng);       
-            }
+                    for (var i = 0; i < landmarkDistances.length; i++) {
+                        if (closest > landmarkDistances[i]) {
+                            //console.log("closest");
+                            closest = landmarkDistances[i];
+                            landmark = locations.landmarks[i];
+                        }
+                    }
+                }
             //creating marker for each person
             for (var i = 0; i < locations.people.length; i++) {
                var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
@@ -81,7 +93,10 @@ function createMap() {
         icon: 'here.png'
     });
     marker.setMap(map);
-    onClick(marker, "JxwgTxWT");
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent("JxwgTxWT" + ", " + "Closest Landmark: " + landmark.properties.Location_Name + ", " + closest + " miles away");
+        infowindow.open(map, marker);
+    });
     map.panTo(myLocation);
 }
 
@@ -92,6 +107,7 @@ function onClick(marker, title, lat, lng) {
         infowindow.setContent(title + ", " + distanceAway + " miles away");
         infowindow.open(map, marker);
     });
+    
 }
 
 //calculates distance between my location and another
