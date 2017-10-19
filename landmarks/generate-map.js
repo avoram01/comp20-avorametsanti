@@ -55,19 +55,19 @@ function getLocations(){
                 }
             //creating marker for each person
             for (var i = 0; i < locations.people.length; i++) {
-               var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
-               peopleMarkers[i] = new google.maps.Marker({
-                   position: currPerson,
-                   title: locations.people[i]._id + "'s' Location",
-                   icon: 'stickman.png'
-               });
+             var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
+             peopleMarkers[i] = new google.maps.Marker({
+                 position: currPerson,
+                 title: locations.people[i]._id + "'s' Location",
+                 icon: 'stickman.png'
+             });
 
-               peopleMarkers[i].setMap(map);
-               onClick(peopleMarkers[i], locations.people[i]._id, locations.people[i].lat, locations.people[i].lng);
-           }
-       }   
-   }
-   request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
+             peopleMarkers[i].setMap(map);
+             onClick(peopleMarkers[i], locations.people[i]._id, locations.people[i].lat, locations.people[i].lng);
+         }
+     }   
+ }
+ request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
 }
 
 //gets my location
@@ -96,6 +96,16 @@ function createMap() {
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent("JxwgTxWT" + ", " + "Closest Landmark: " + landmark.properties.Location_Name + ", " + closest + " miles away");
         infowindow.open(map, marker);
+        var flightPlanCoordinates = [{lat: myLat, lng: myLng},
+                                     {lat: landmark.geometry.coordinates[1], lng: landmark.geometry.coordinates[0]}];
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        flightPath.setMap(map);
     });
     map.panTo(myLocation);
 }
@@ -105,7 +115,8 @@ function onClick(marker, title, lat, lng) {
     var distanceAway = distanceBetween(lat, lng);
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(title + ", " + distanceAway + " miles away");
-        infowindow.open(map, marker);
+        infowindow.open(map, marker)
+        //FIX THIS
     });
     
 }
