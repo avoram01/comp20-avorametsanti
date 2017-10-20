@@ -47,7 +47,6 @@ function getLocations(){
                     onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, currentLandmark.lat, currentLandmark.lng);       
                     for (var i = 0; i < landmarkDistances.length; i++) {
                         if (closest > landmarkDistances[i]) {
-                            //console.log("closest");
                             closest = landmarkDistances[i];
                             landmark = locations.landmarks[i];
                         }
@@ -94,7 +93,7 @@ function createMap() {
     });
     marker.setMap(map);
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent("JxwgTxWT" + ", " + "Closest Landmark: " + landmark.properties.Location_Name + ", " + closest + " miles away");
+        infowindow.setContent("Login: JxwgTxWT" + ", " + "Closest Landmark: " + landmark.properties.Location_Name + ", " + closest + " miles away");
         infowindow.open(map, marker);
         var flightPlanCoordinates = [{lat: myLat, lng: myLng},
                                      {lat: landmark.geometry.coordinates[1], lng: landmark.geometry.coordinates[0]}];
@@ -116,9 +115,7 @@ function onClick(marker, title, lat, lng) {
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(title + ", " + distanceAway + " miles away");
         infowindow.open(map, marker)
-        //FIX THIS
     });
-    
 }
 
 //calculates distance between my location and another
