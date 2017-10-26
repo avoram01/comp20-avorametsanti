@@ -7,8 +7,27 @@
     <title>Captain's Log</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        // Your work will be done here...
+    <script type="text/javascript">
+        messages = Array();
+        numMsgs = 0;
+        $(document).ready(function() {
+            output = "";
+            for (key in localStorage) {
+                output = output + "<p>" + localStorage[key] + "</p>\n";
+            }
+            $('#log').html(output);
+
+            //when return key is pressed, inputted message is added to array
+            $('#msg').keypress(function(entry) {
+                var keycode = entry.keyCode || entry.which;
+                if(keycode == '13') {
+                    messages[numMsgs] = $('#msg').val();
+                    $('#log').html("<br>" + messages + "</br>");
+                    localStorage[new Date().getTime()] = messages[numMsgs];
+                    numMsgs++;
+                }
+            });
+        });
     </script>
 </head>
 
