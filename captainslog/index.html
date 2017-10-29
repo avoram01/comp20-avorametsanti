@@ -13,10 +13,7 @@
         numMsgs = 0;
         $(document).ready(function() {
             for (key in localStorage) {
-                //NEED TO ADD DATES TO OUTPUT
-                //console.log(key);
-                //console.log("key " + key);
-                output = output + "<p>" + localStorage[key] + "</p>\n";
+                output = "<p>" + localStorage[key] + "</p>\n" + output;
             }
             $('#log').html(output);
 
@@ -29,17 +26,15 @@
 
                     //getting time
                     var time = new Date().getTime();
-                    console.log("time " + time);
                     var date = new Date().toUTCString();
-                    console.log("date " + date);
 
                     //updating log
                     var newMsg = date + " - " + messages[numMsgs];
-                    output = output + "<p>" + newMsg + "</p>";
-                    console.log("newMsg " + newMsg);
+                    output = "<p>" + newMsg + "</p>" + output;
                     $('#log').html(output);
                     localStorage.setItem(time, newMsg);
                     numMsgs++;
+                    $('#msg').val("");
                 }
             });
         });
