@@ -1,0 +1,30 @@
+body {
+    background-color: #800000;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    font-size: 50px;
+}
+
+h3 {
+    font-family: 'Dosis', sans-serif;
+    background-color: #FBFA93;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FBFA93;
+}
+
+#msg {
+    font-family: 'Bitter', serif;
+}
+
+#log {
+    font-family: 'Bitter', serif;
+    font-size: 20px;
+    font-color: #000000;
+    background-image: url("captainslog.jpeg");
+    background-size: 100%;
+    
+}
