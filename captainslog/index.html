@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+        var output = "";
         messages = Array();
         numMsgs = 0;
         $(document).ready(function() {
-            output = "";
             for (key in localStorage) {
+                //NEED TO ADD DATES TO OUTPUT
+                //console.log(key);
+                //console.log("key " + key);
                 output = output + "<p>" + localStorage[key] + "</p>\n";
             }
             $('#log').html(output);
@@ -21,9 +24,21 @@
             $('#msg').keypress(function(entry) {
                 var keycode = entry.keyCode || entry.which;
                 if(keycode == '13') {
+                    //taking input
                     messages[numMsgs] = $('#msg').val();
-                    $('#log').html("<br>" + messages + "</br>");
-                    localStorage[new Date().getTime()] = messages[numMsgs];
+
+                    //getting time
+                    var time = new Date().getTime();
+                    console.log("time " + time);
+                    var date = new Date().toUTCString();
+                    console.log("date " + date);
+
+                    //updating log
+                    var newMsg = date + " - " + messages[numMsgs];
+                    output = output + "<p>" + newMsg + "</p>";
+                    console.log("newMsg " + newMsg);
+                    $('#log').html(output);
+                    localStorage.setItem(time, newMsg);
                     numMsgs++;
                 }
             });
