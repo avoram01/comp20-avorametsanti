@@ -26,7 +26,7 @@ function init() {
 
 //getting locations from servers
 function getLocations(){
-    request.open("POST", "https://findcomp20students.herokuapp.com/sendLocation", true);
+    request.open("POST", "/sendLocation", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
