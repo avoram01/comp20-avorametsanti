@@ -26,7 +26,7 @@ function init() {
 
 //getting locations from servers
 function getLocations(){
-    request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+    request.open("POST", "https://findcomp20students.herokuapp.com/sendLocation", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
@@ -34,24 +34,24 @@ function getLocations(){
             locations = JSON.parse(rawData);
 
             //creating markers for landmarks
-            for (var i = 0; i < locations.landmarks.length; i++) {
+            for (var i = 0; i < locations.landmarks.length; i++) {  
                 var currentLandmark = {lat: locations.landmarks[i].geometry.coordinates[1],
                     lng: locations.landmarks[i].geometry.coordinates[0]};
-                    landmarkMarkers[i] = new google.maps.Marker({
-                        position: currentLandmark,
-                        title: locations.landmarks[i].properties.Location_Name,
-                        icon: 'liberty.png'
-                    });
-                    landmarkMarkers[i].setMap(map);
-                    landmarkDistances[i] = distanceBetween(currentLandmark.lat, currentLandmark.lng);
-                    onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, currentLandmark.lat, currentLandmark.lng);       
-                    for (var i = 0; i < landmarkDistances.length; i++) {
-                        if (closest > landmarkDistances[i]) {
-                            closest = landmarkDistances[i];
-                            landmark = locations.landmarks[i];
-                        }
+                landmarkMarkers[i] = new google.maps.Marker({
+                    position: currentLandmark,
+                    title: locations.landmarks[i].properties.Location_Name,
+                    icon: 'liberty.png'
+                });
+                landmarkMarkers[i].setMap(map);
+                landmarkDistances[i] = distanceBetween(currentLandmark.lat, currentLandmark.lng);
+                onClick(landmarkMarkers[i], locations.landmarks[i].properties.Location_Name, currentLandmark.lat, currentLandmark.lng);       
+                for (var i = 0; i < landmarkDistances.length; i++) {
+                    if (closest > landmarkDistances[i]) {
+                        closest = landmarkDistances[i];
+                        landmark = locations.landmarks[i];
                     }
                 }
+            }
             //creating marker for each person
             for (var i = 0; i < locations.people.length; i++) {
              var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
@@ -67,6 +67,7 @@ function getLocations(){
      }   
  }
  request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
+ //request.send();
 }
 
 //gets my location

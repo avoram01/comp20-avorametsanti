@@ -56,7 +56,7 @@ function getLocations(){
             }
             //creating marker for each person
             for (var i = 0; i < locations.people.length; i++) {
-                console.log("person " + i);
+                //console.log("person " + i);
                 var currPerson = {lat: locations.people[i].lat, lng: locations.people[i].lng};
                 peopleMarkers[i] = new google.maps.Marker({
                    position: currPerson,
@@ -117,7 +117,7 @@ function createMap() {
 function onClickLandmark(marker, title) {
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(title + marker.properties.Details);
-        //infowindow.open(map, landmarkMarkers[i])
+        infowindow.open(map, landmarkMarkers[i])
     });   
 }
 
