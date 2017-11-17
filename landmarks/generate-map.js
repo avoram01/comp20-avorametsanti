@@ -34,6 +34,8 @@ function getLocations(){
             var rawData = request.responseText;
             locations = JSON.parse(rawData);
 
+            console.log("locations " + locations);
+
             //creating markers for landmarks
             for (var i = 0; i < locations.landmarks.length; i++) {  
                 var currentLandmark = {lat: locations.landmarks[i].geometry.coordinates[1],
