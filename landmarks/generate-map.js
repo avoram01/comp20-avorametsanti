@@ -34,7 +34,7 @@ function getLocations(){
             var rawData = request.responseText;
             locations = JSON.parse(rawData);
 
-            console.log("locations ", locations);
+            //console.log("locations ", locations);
 
             //creating markers for landmarks
             for (var i = 0; i < locations.landmarks.length; i++) {  
@@ -69,7 +69,7 @@ function getLocations(){
          }
      }   
  }
- console.log(myLat + " " + myLng);
+ //console.log(myLat + " " + myLng);
  request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
  //request.send();
 }
