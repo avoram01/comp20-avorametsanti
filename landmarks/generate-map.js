@@ -26,6 +26,7 @@ function init() {
 
 //getting locations from servers
 function getLocations(){
+    //request.open("POST", "https://find/sendLocation", true);
     request.open("POST", "https://findcomp20students.herokuapp.com/sendLocation", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.onreadystatechange = function() {
@@ -66,6 +67,7 @@ function getLocations(){
          }
      }   
  }
+ console.log(myLat + " " + myLng);
  request.send("login=JxwgTxWT&lat=" + myLat + "&lng=" + myLng);
  //request.send();
 }
