@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Assessment</title>
+</head>
+<body>
+
+    <h1>Security Assessment of Client-Side and Server Side of Landmarks Project</h1>
+
+    <h4>Introduction</h4>
+    <p>The purpose of this project is to render a map indicating the check-ins from users who have logged into the server as well as the landmarks based on the user's location. The server-side of this project accepts login information and stores it into a database. With valid login information, the server sends back the locations of all other check-ins as well as the landmarks within the vicinity the user in JSON format. In addition, the server can return the check-ins from a specific login in JSON format and display all the check-ins to the server. The client-side of this project retrieves the user's location and sends their information to the server. The client-side also processes the data sent from the server and renders those locations on a map. </p>
+
+    <h4>Methodology</h4>
+    <p>In order to test this application, I used Postman to send post requests and to view the data returned from the server. Using Postman, I was able to manipulate what data I sent to the server (login parameters).</p>
+
+    <h4>Abstract of Findings</h4>
+    <p>I found 3 security issues. The first security issue with this project was that the server side does not validate login information, which allows "incorrect" values to be inserted into the database, such as latitudes and longitudes that do not exist. Another security issue is that if [$ne] is used as a query when getting the check-ins from a specific user, it returns all the check-ins to the server. The last security issue I found was that the application does not limit the number of check-ins per login.</p>
+
+    <h4>Issues found</h4>
+
+    <h5>1. Does not validate login</h5>
+    <p>The application does not validate login information. Although it only allows data of the specified type (i.e. numbers for latitudes and longitudes and no javascript can be used at all) to be used as parameters, it does not ensure that the latitudes and longitudes are numbers that represent valid latitudes and longitudes of Earth. Instead, the program directly takes the login parameters and inserts it into the database. </p>
+
+    <div class="insert"></div>
+
+    <p>This would be a low level issue. Based on how we wrote the client-side for this project, we send the latitude and longitude based on geolocation, which automatically determined. If the geolocation is not found, no request is sent to the server. Therefore, it is impossible to send non-latitude or non-longitude numbers to the server using this project. However, in other applications, such as if the user inputs the latitude and longitude themselves, this lack of validation can pose a risk. If non-latitude and non-longitude numbers are stored in the database, the server will still return all the data that are supposed to represent real locations to the client. If some latitudes and longitudes do not represent real places, this can mess up the functionality of client-side applications. In order to fix this issue, the coder could insure that a check-in is only inserted if a valid latitude and longitude is provided</p>
+
+    <h5>2. [$ne] as Query String</h5>
+    <p>The server side for this project can handle get requests to /checkins.json, which returns the check-ins of a specified login, given in the URL as a query string. However, when the user accesses /checkins.json using [$ne] as a query string, all the check-ins from all logins are returned in JSON format.</p>
+
+    <div class="[$ne]"></div>
+
+    <p>This is a high level security risk because anybody can access all the check-ins from any user. The reason why a user can use [@ne] as a query string is because it is a feature of mongod. When using "?login="jack"", this is specifying the login to equal "jack". However, using [$ne] like "?login[$ne]=jack" specifies all the logins that do not equal jack. If the user were to input "?login[$ne]=", this is saying all the logins that do not equal nothing, which in turn are all the logins. This is dangerous for users because anybody can find their location and use that data for malicious purposes. One way to resolve this issue is to check for the "[$ne]" string query and not return data if found.</p>
+
+    <h5>3. Availability Issues</h5>
+    <p>The last issue I found was that the application does not account for when the database if full. This is a low level issue because it is unlikely that the database will fill up, given the size of each check-in is only a couple of kilobytes. However, the coder could implement a mechanism to limit the number of check-ins per login, such as by deleting all the check-ins of a certain login when a max number of logins is reached.</p>
+
+</body>
+</html>
