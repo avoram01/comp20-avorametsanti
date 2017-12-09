@@ -1,0 +1,21 @@
+img {
+    height: 60%;
+    width: 60%;
+    display: block
+}
+
+body {
+    background-color: #fffff0;
+}
+
+h1 {
+    font-family: 'Spectral SC', serif;
+}
+
+h4 {
+    font-family: 'Oswald', sans-serif;
+}
+
+p {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}

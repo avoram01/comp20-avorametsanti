@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Security Assessment</title>
+    <link rel="stylesheet" type="text/css" href="styling.css">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed|Oswald|Spectral+SC" rel="stylesheet">
 </head>
 <body>
 
@@ -21,14 +23,15 @@
     <h5>1. Does not validate login</h5>
     <p>The application does not validate login information. Although it only allows data of the specified type (i.e. numbers for latitudes and longitudes and no javascript can be used at all) to be used as parameters, it does not ensure that the latitudes and longitudes are numbers that represent valid latitudes and longitudes of Earth. Instead, the program directly takes the login parameters and inserts it into the database. </p>
 
-    <div class="insert"></div>
+    <img src="insert.jpg" alt="Insert algorithm in code">
+    <img src="accepting-all-ints.jpg" alt="Accepts all ints for location">
 
     <p>This would be a low level issue. Based on how we wrote the client-side for this project, we send the latitude and longitude based on geolocation, which automatically determined. If the geolocation is not found, no request is sent to the server. Therefore, it is impossible to send non-latitude or non-longitude numbers to the server using this project. However, in other applications, such as if the user inputs the latitude and longitude themselves, this lack of validation can pose a risk. If non-latitude and non-longitude numbers are stored in the database, the server will still return all the data that are supposed to represent real locations to the client. If some latitudes and longitudes do not represent real places, this can mess up the functionality of client-side applications. In order to fix this issue, the coder could insure that a check-in is only inserted if a valid latitude and longitude is provided</p>
 
     <h5>2. [$ne] as Query String</h5>
     <p>The server side for this project can handle get requests to /checkins.json, which returns the check-ins of a specified login, given in the URL as a query string. However, when the user accesses /checkins.json using [$ne] as a query string, all the check-ins from all logins are returned in JSON format.</p>
 
-    <div class="[$ne]"></div>
+    <img src="checkins.jpg" alt="Reveals all checkins from server"
 
     <p>This is a high level security risk because anybody can access all the check-ins from any user. The reason why a user can use [@ne] as a query string is because it is a feature of mongod. When using "?login="jack"", this is specifying the login to equal "jack". However, using [$ne] like "?login[$ne]=jack" specifies all the logins that do not equal jack. If the user were to input "?login[$ne]=", this is saying all the logins that do not equal nothing, which in turn are all the logins. This is dangerous for users because anybody can find their location and use that data for malicious purposes. One way to resolve this issue is to check for the "[$ne]" string query and not return data if found.</p>
 
