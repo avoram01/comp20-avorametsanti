@@ -16,7 +16,7 @@
     <p>In order to test this application, I used Postman to send post requests and to view the data returned from the server. Using Postman, I was able to manipulate what data I sent to the server (login parameters).</p>
 
     <h4>Abstract of Findings</h4>
-    <p>I found 3 security issues. The first security issue with this project was that the server side does not validate login information, which allows "incorrect" values to be inserted into the database, such as latitudes and longitudes that do not exist. Another security issue is that if [$ne] is used as a query when getting the check-ins from a specific user, it returns all the check-ins to the server. The last security issue I found was that the application does not limit the number of check-ins per login.</p>
+    <p>I found 2 security issues and 1 privacy issue. The first security issue with this project was that the server side does not validate login information, which allows "incorrect" values to be inserted into the database, such as latitudes and longitudes that do not exist. The second security issue I found was that the application does not limit the number of check-ins per login. In addition, there is a privacy issue that allows [$ne] to be used as a query string to returns all the check-ins from all users when only the check-ins of a specific user are supposed to be returned.</p>
 
     <h4>Issues found</h4>
 
