@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"express": "latest",
+		"cheerio": "latest",
+		"request": "latest",
+		"body-parser": "latest",
+		"@google/maps": "latest"
+	}
+}

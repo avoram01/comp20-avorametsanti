@@ -1,0 +1,45 @@
+html {
+    margin: 0;
+    padding: 0;
+
+}
+
+
+button {
+    background-color: #17A589;   /* Green */
+    color: white;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    text-align: center;
+    font-size: 16px;
+    width: 100px;
+    border: none;
+}
+
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: #BFC0C0;   /*#c9b7b7;*/
+    font-family: Arial;
+    margin: 0 0;
+    padding: 0 0;
+    color: #2D3142;
+}
+
+
+.button {
+	padding-bottom: 24px;
+}
+
+.submitButton {
+    background-color: #3498DB;
+    border: none;
+    color: white;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 150px;
+}

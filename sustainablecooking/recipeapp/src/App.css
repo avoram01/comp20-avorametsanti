@@ -1,0 +1,35 @@
+@media screen and (min-width: 361px) and (min-height: 641px)
+and (-webkit-device-pixel-ratio: 3){
+.title {
+  margin-left: 1vw;
+  margin: 0 0;
+  font-size: 3vw;
+}
+}
+
+@media screen and (max-width: 360px) and (max-height: 640px) and (-webkit-device-pixel-ratio: 3){
+    .title {
+            margin-left: 1vw;
+            margin: 0 0;
+      font-size: 7vmin;
+    }
+    .heading {
+            background-color: #EF8354;
+            margin: 0 0;
+            padding-top: 10px;
+            padding-left: 10px;
+            width: 100%;
+      height: 12vmin;
+      border-bottom: 1vh solid #4F5D75;
+    }
+}
+
+.heading {
+  background-color: #EF8354;
+  margin: 0 0;
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 100%;
+  height: 7vh;
+  border-bottom: 1vh solid #4F5D75;
+}

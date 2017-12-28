@@ -1,0 +1,44 @@
+.placeForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.description {
+	font-size: 2.25vmin;
+	max-width: 50%;
+	text-align: center;
+}
+
+.submitPlaceButton {
+    background-color: #EF8354;
+    border: none;
+    color: white;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3.5vmin;
+    width: 20vw;
+    height: 12vh;
+}
+
+@media(max-width: 420px) {
+
+.placeForm {
+	padding-top: 15vh;
+}
+
+    .description {
+        font-size: 4vmin;
+
+    }
+
+    .submitPlaceButton {
+        width: 40vw;
+        height: 15vh;
+        font-size: 6vw;
+    }
+}

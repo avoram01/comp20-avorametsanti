@@ -1,0 +1,23 @@
+{
+  "name": "recipeapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "flexbox-react": "^4.4.0",
+    "google-maps-react": "^1.1.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-event-listener": "^0.5.1",
+    "react-list": "^0.8.8",
+    "react-places-autocomplete": "^5.4.3",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
